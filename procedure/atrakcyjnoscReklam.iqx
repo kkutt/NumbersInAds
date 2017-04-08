@@ -1,0 +1,370 @@
+﻿
+** Czy liczby w specyfikacjach są interpretowane zgodnie z heurystykami używanymi przy cenach?** 
+
+Autorzy: Krzysztof Kutt, Joanna Nowak, Konrad Szklarski, Anna Szlezynger
+Przedmiot: Eksperymentalna Psychologia Reklamy, rok akademicki 2015/2016
+
+Skrót działania: Na początku użytkownik jest przydzielany do jednej z 4 wersji ankiety.
+W każdej wersji jest 6 bodźców (różnych ofert laptopów), które wyświetlane są w kolejności losowej.
+Dla każdego bodźca użytkownik musi ocenić jego atrakcyjność na skali 1-11.
+Zapisywana jest ocena każdego z bodźców oraz szybkość reakcji.
+
+
+******************************************  KONFIGURACJA  ******************************************
+
+** Ustawienia domyślne (czcionka, kolor ekranu, rozmiar ekranu)
+<defaults>
+/ fontstyle = ("Arial", 3%, false, false, false, false, 5, 1)
+/ txcolor = (0, 0, 0)
+/ screencolor = white
+/ canvassize = (1000px, 700px)
+/ windowsize = (1000px, 700px)
+</defaults>
+
+
+******************************************  EKSPERYMENT  *******************************************
+
+<expt ankieta_A>
+/ subjects = (1 of 4)
+/ groupassignment = random
+/ preinstructions = ()
+/ blocks = [1=powitanie; 2=trening; 3=wlasciwe_triale_A; 4=podsumowanie]
+/ postinstructions = ()
+</expt>
+
+<expt ankieta_B>
+/ subjects = (2 of 4)
+/ groupassignment = random
+/ preinstructions = ()
+/ blocks = [1=powitanie; 2=trening; 3=wlasciwe_triale_B; 4=podsumowanie]
+/ postinstructions = ()
+</expt>
+
+<expt ankieta_C>
+/ subjects = (3 of 4)
+/ groupassignment = random
+/ preinstructions = ()
+/ blocks = [1=powitanie; 2=trening; 3=wlasciwe_triale_C; 4=podsumowanie]
+/ postinstructions = ()
+</expt>
+
+<expt ankieta_D>
+/ subjects = (4 of 4)
+/ groupassignment = random
+/ preinstructions = ()
+/ blocks = [1=powitanie; 2=trening; 3=wlasciwe_triale_D; 4=podsumowanie]
+/ postinstructions = ()
+</expt>
+
+
+------------------------------------------  ZAPIS DANYCH  ------------------------------------------
+
+<data>
+/file = "reklama-liczby-triale.iqdat"
+/separatefiles = false
+/columns = [date, time, subject, trialcode, stimulusnumber, stimulusitem, response, latency]
+</data>
+
+<summarydata>
+/file = "reklama-liczby-badani.iqdat"
+/columns = [script.startdate, script.starttime, script.subjectid, checkboxes.zgoda.response,
+            dropdown.plec.response, textbox.wiek.response, textbox.email.response]
+</summarydata>
+
+
+*******************************************  INSTRUKCJE  *******************************************
+
+<instruct>
+/ inputdevice = mouse
+/ lastlabel = "Dalej"
+</instruct>
+
+
+<page trening_instrukcja>
+^Celem badania jest ocena ATRAKCYJNOŚCI ofert laptopów, które zostaną zaprezentowane.
+
+^^Prosimy, abyś oceniał/a atrakcyjność JAK NAJSZYBCIEJ, bez dłuższego zastanowienia.
+^Ocena polega na wybraniu odpowiedniej wartości z zakresu 1-11, gdzie:
+^     - 1 to oferta w ogóle nieatrakcyjna,
+^     - 6 to oferta przeciętna,
+^     - 11 to oferta bardzo atrakcyjna.
+
+^^Za moment zobaczysz jedną ofertę "treningową", aby oswoić się z procedurą i upewnić się, że wszystko jest jasne.
+^Gdy będziesz gotowy/a, naciśnij przycisk Dalej i przejdziemy do oferty "treningowej".
+</page>
+
+
+<page wlasciwa_instrukcja>
+BRAWO! Oceniłeś/aś ofertę na <% likert.oferta_trening.response %>
+i zajęło Ci to tylko <% likert.oferta_trening.latency / 1000 %> s!
+
+^^Teraz nastąpi właściwa część badania.
+^Wyobraź sobie, że masz 2000 zł i chcesz kupić nowego laptopa. Znalazłaś/eś 6 ofert.
+W każdej ofercie jest dokładnie ten sam komputer za dokładnie 2000 zł. Różnicą jest tylko procesor.
+
+^^Za chwilę zostaną zaprezentowane wszystkie oferty. Oceń atrakcyjność każdej z nich.
+Postaraj się to zrobić JAK NAJSZYBCIEJ.
+
+^^Wskazówka: laptopy w cenie 2000 zł mają zwykle procesory dwurdzeniowe taktowane zegarem 1700-2000 MHz.
+</page>
+
+-----------------------------------  POWITANIE I ZGODA NA UDZIAŁ  ----------------------------------
+
+<survey powitanie>
+/ pages = [1=first_page]
+/ itemspacing = 2.5%
+/ showpagenumbers = false
+/ showquestionnumbers = false
+/ showbackbutton = false
+/ finishlabel = "Dalej"
+/ recorddata = false
+</survey>
+
+<surveypage first_page>
+/ caption = "Witaj!
+
+Bardzo dziękujemy za chęć pomocy w naszym badaniu!
+Twoje zadanie będzie polegało na ocenie kilku ofert laptopów.
+Całość potrwa nie dłużej niż 5 minut.
+
+Twój udział w badaniu jest anonimowy: nie gromadzimy danych osobowych.
+
+Gdy będziesz gotowy/a, naciśnij przycisk Dalej i przejdziemy do właściwej instrukcji do badania."
+/ questions = [1=zgoda]
+/ recorddata = false
+/ nextbuttonposition = (75,80)
+</surveypage>
+
+<checkboxes zgoda>
+/ caption = "Wyrażenie poniższej zgody jest konieczne do kontynuowania badania. Jeżeli nie wyrażasz zgody, możesz po prostu zamknąć to okno."
+/ required = true
+/ options=("Wyrażam zgodę na udział w badaniu psychologicznym, przeprowadzanym przez studentów Instytutu Psychologii UJ. Przyjmuję do wiadomości, że w każdej chwili mogę wycofać się z udziału w eksperymencie bez podania powodu, jeżeli uznam to za stosowne.")
+/ position = (10, 50)
+</checkboxes>
+
+
+------------------------------------------  PODSUMOWANIE  ------------------------------------------
+
+<survey podsumowanie>
+/ pages = [1=final_page]
+/ itemspacing = 2.5%
+/ showpagenumbers = false
+/ showquestionnumbers = false
+/ showbackbutton = false
+/ finishlabel = "Zakończ"
+/ recorddata = false
+</survey>
+
+<surveypage final_page>
+/ caption = "To już koniec badania.
+
+Jego celem jest sprawdzenie w jaki sposób liczby obecne w reklamach
+(w tym przypadku szybkość procesora) są przetwarzane przez ludzi.
+Chcemy ustalić czy kryją się za tym mechanizmy podobne do przetwarzania
+cen w reklamach.
+
+Jeżeli jesteś zainteresowana/y wynikami badania, prosimy podaj nam
+swój adres e-mail. Po opracowaniu wyników (w pierwszej połowie lutego),
+prześlemy Ci na ten adres szczegółowy raport opisujący całe badanie.
+
+Prosimy, podaj nam jeszcze kilka podstawowych danych o sobie.
+Dziękujemy za udział!"
+/ questions = [1=plec; 2=wiek; 3=email]
+/ recorddata = false
+/ nextbuttonposition = (75,78)
+</surveypage>
+
+<dropdown plec>
+/ caption = "Płeć:"
+/ options = ("Kobieta", "Mężczyzna")
+/ position = (10, 60)
+</dropdown>
+
+<textbox wiek>
+/ caption = "Wiek:"
+/ mask = positiveinteger
+/ range = (7, 110)
+/ position = (30, 60)
+/ maxchars = 3
+</textbox>
+
+<textbox email>
+/ caption = "E-mail:"
+/ mask = emailaddress
+/ position = (10, 73)
+/ textboxsize = (50, 5)
+/ required = false
+</textbox>
+
+
+*********************************************  TRENING  ********************************************
+
+<block trening>
+/ preinstructions = (trening_instrukcja)
+/ trials = [1 = oferta_trening]
+/ recorddata = false
+</block>
+
+<likert oferta_trening>
+/ anchors = [1 ="Bardzo nieatrakcyjna"; 2=""; 3=""; 4=""; 5=""; 6="Przeciętna"; 7=""; 8=""; 9=""; 10=""; 11="Bardzo atrakcyjna"]
+/ anchorwidth = 45
+/ stimulusframes = [1 = polecenie, rysunek_trening]
+/ mouse = true
+/ numpoints = 11
+/ position = (50, 85)
+</likert>
+
+<picture rysunek_trening>
+/size = (800, 800)
+/items = ("trening.jpg")
+/position = (50, 45)
+/halign = center
+</picture>
+
+
+*****************************************  TRIALE WŁAŚCIWE  ****************************************
+
+<text polecenie>
+/ items = ("Oceń atrakcyjność przedstawionej oferty:")
+/ position = (50, 10)
+</text>
+
+
+-------------------------------------------  GRUPA 1(A)  -------------------------------------------
+
+<block wlasciwe_triale_A>
+/ preinstructions = (wlasciwa_instrukcja)
+/ trials = [1-6 = oferta_A]
+</block>
+
+<likert oferta_A>
+/ anchors = [1 ="Bardzo nieatrakcyjna"; 2=""; 3=""; 4=""; 5=""; 6="Przeciętna"; 7=""; 8=""; 9=""; 10=""; 11="Bardzo atrakcyjna"]
+/ anchorwidth = 45
+/ stimulusframes = [1 = rysunek_A, polecenie]
+/ mouse = true
+/ numpoints = 11
+/ position = (50, 85)
+</likert>
+
+<picture rysunek_A>
+/size = (800, 800)
+/items = rysunki_A
+/position = (50, 45)
+/halign = center
+/select = noreplace
+</picture>
+
+
+-------------------------------------------  GRUPA 2(B)  -------------------------------------------
+
+<block wlasciwe_triale_B>
+/ preinstructions = (wlasciwa_instrukcja)
+/ trials = [1-6 = oferta_B]
+</block>
+
+<likert oferta_B>
+/ anchors = [1 ="Bardzo nieatrakcyjna"; 2=""; 3=""; 4=""; 5=""; 6="Przeciętna"; 7=""; 8=""; 9=""; 10=""; 11="Bardzo atrakcyjna"]
+/ anchorwidth = 45
+/ stimulusframes = [1 = rysunek_B, polecenie]
+/ mouse = true
+/ numpoints = 11
+/ position = (50, 85)
+</likert>
+
+<picture rysunek_B>
+/size = (800, 800)
+/items = rysunki_B
+/position = (50, 45)
+/halign = center
+/select = noreplace
+</picture>
+
+
+-------------------------------------------  GRUPA 3(C)  -------------------------------------------
+
+<block wlasciwe_triale_C>
+/ preinstructions = (wlasciwa_instrukcja)
+/ trials = [1-6 = oferta_C]
+</block>
+
+<likert oferta_C>
+/ anchors = [1 ="Bardzo nieatrakcyjna"; 2=""; 3=""; 4=""; 5=""; 6="Przeciętna"; 7=""; 8=""; 9=""; 10=""; 11="Bardzo atrakcyjna"]
+/ anchorwidth = 45
+/ stimulusframes = [1 = rysunek_C, polecenie]
+/ mouse = true
+/ numpoints = 11
+/ position = (50, 85)
+</likert>
+
+<picture rysunek_C>
+/size = (800, 800)
+/items = rysunki_C
+/position = (50, 45)
+/halign = center
+/select = noreplace
+</picture>
+
+
+-------------------------------------------  GRUPA 4(D)  -------------------------------------------
+
+<block wlasciwe_triale_D>
+/ preinstructions = (wlasciwa_instrukcja)
+/ trials = [1-6 = oferta_D]
+</block>
+
+<likert oferta_D>
+/ anchors = [1 ="Bardzo nieatrakcyjna"; 2=""; 3=""; 4=""; 5=""; 6="Przeciętna"; 7=""; 8=""; 9=""; 10=""; 11="Bardzo atrakcyjna"]
+/ anchorwidth = 45
+/ stimulusframes = [1 = rysunek_D, polecenie]
+/ mouse = true
+/ numpoints = 11
+/ position = (50, 85)
+</likert>
+
+<picture rysunek_D>
+/size = (800, 800)
+/items = rysunki_D
+/position = (50, 45)
+/halign = center
+/select = noreplace
+</picture>
+
+
+*********************************************  BODŹCE  *********************************************
+
+<item rysunki_A>
+/ 1="1600.jpg"
+/ 2="1650_.jpg"
+/ 3="1700_.jpg"
+/ 4="2018_.jpg"
+/ 5="2054.jpg"
+/ 6="2100.jpg"
+</item>
+
+<item rysunki_B>
+/ 1="1616.jpg"
+/ 2="1650.jpg"
+/ 3="1721_.jpg"
+/ 4="2000_.jpg"
+/ 5="2050_.jpg"
+/ 6="2111.jpg"
+</item>
+
+<item rysunki_C>
+/ 1="1616_.jpg"
+/ 2="1659.jpg"
+/ 3="1700.jpg"
+/ 4="2018.jpg"
+/ 5="2054_.jpg"
+/ 6="2100_.jpg"
+</item>
+
+<item rysunki_D>
+/ 1="1600_.jpg"
+/ 2="1659_.jpg"
+/ 3="1721.jpg"
+/ 4="2000.jpg"
+/ 5="2050.jpg"
+/ 6="2111_.jpg"
+</item>
+
