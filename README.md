@@ -39,6 +39,7 @@ If numbers in specifications are interpreted according to the same heuristics us
 - [Raport.pdf] -- final raport from the project (in Polish)
 
 [Institute of Psychology]: <http://www.psychologia.uj.edu.pl/index.php/eng/>
+[Inquisit]: <http://www.millisecond.com/products/inquisit5/weboverview.aspx>
 [atrakcyjnoscReklam.iqx]: <procedure/atrakcyjnoscReklam.iqx>
 [images in procedure directory]: <procedure/>
 [data directory]: <data/>
