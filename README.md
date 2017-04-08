@@ -8,9 +8,11 @@ Procedure written by **Krzysztof Kutt**. Stimuli prepared by **Konrad Szklarski*
 ##### Stimuli
 Notebook advertisement with the same image and price (2000 PLN).
 They differ with CPU frequency. There were 6 different values in accurate and round versions:
+
 |  Rounded: | 1600 | 1650 | 1700 | 2000 | 2050 | 2100 |
 |:---------:|:-:|:-:|:-:|:-:|:-:|:-:|
 | Accurate: | 1616 | 1659 | 1721 | 2018 | 2054 | 2111 |
+
 Each of them was written with normal and bigger font size (what sums up to 24 different stimuli).
 
 ##### Groups
